@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baker's CS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='images/inicio_fondo.png') }}") no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+        }
+
+        nav {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding-bottom: 5px;
+        }
+        nav ul li a:hover {
+            color: #555;
+            border-bottom: 2px solid #555;
+        }
+
+
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section {
+            margin-bottom: 60px;
+        }
+        .section-heading {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .product {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.9); 
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+      
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+      
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+
+ 
+        .title-box {
+            border-radius: 8px;
+            padding: 20px;
+            margin: 50px auto; 
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center; 
+        }
+        .title-box h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #ffffff; 
+        }
+        .title-box p {
+            font-size: 1.5em;
+            margin-bottom: 0;
+            color: #ffffff;
+        }
+
+       
+        .map-container {
+            text-align: center; 
+            margin: 50px auto;
+        }
+        .map-container iframe {
+            width: 100%;
+            max-width: 800px; 
+            height: 450px; 
+            border: none; 
+            border-radius: 8px; 
+        }
+    </style>
+</head>
+<body>
+    {% include "cabecera.html" %}
+    <div class="title-box">
+        <h1>Panadería Baker's CS</h1>
+        <p>Ofreciendo los mejores panes y pasteles desde 1990</p>
+    </div>
+    <div class="container">
+        <section class="section">
+            <div class="product">
+                <h3>¿Qué es Baker's CS?</h3>
+                <p>Somos una familia que busca proporcionar los mejores productos horneados, utilizando recetas tradicionales y los ingredientes más frescos.</p>
+            </div>
+        </section>
+    </div>
+
+    <h2 style="text-align: center; margin-top: 50px; color:#f8f9fa">¿Cómo llegar a nuestro establecimiento?</h2>
+
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d903.2051660900523!2d-71.53485693473937!3d-16.391792874393524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b43a126c99f%3A0x163f88ffd93dedb3!2sPanaderia%20Arequipe%C3%B1a%20Don%20Apolinario%20o%20%22Pan%20de%20Ripacha%22!5e0!3m2!1ses-419!2spe!4v1718750548319!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+</body>
+</html>

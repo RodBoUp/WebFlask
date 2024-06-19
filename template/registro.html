@@ -1,0 +1,119 @@
+{% include "cabecera.html" %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url("{{ url_for('static', filename='images/pan1.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+    }
+
+    .caja {
+        margin: 10% auto;
+        width: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 2px solid #ffc107;
+    }
+
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: .5rem;
+    }
+
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+        display: block;
+        width: 90%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    .form-check-input {
+        position: absolute;
+        margin-top: .3rem;
+        margin-left: -1.25rem;
+    }
+
+    .form-check-label {
+        margin-left: .5rem;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(
+            90deg,
+            rgb(219, 198, 2) 25%,
+            rgb(171, 201, 1) 100%);
+            cursor: pointer;
+    }
+</style>
+
+<div class="caja">
+    <form action="crear-registro" method="post">
+        <h1>Registro</h1>
+        {% if error %}
+        {{error}}
+        {% endif %}
+        {% if mensaje %}
+        {{mensaje}}
+        {% endif %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Correo electronico</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduzca su correo" name="correo"> 
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Contraseña</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" name="contraseña">
+        </div>
+        <button type="submit" class="btn-primary">Ingresar</button>
+      </form>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Pasteles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .cake {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .cake-item {
+            width: 300px;
+            background-color: #fff;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        .cake-item h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+<body>
+    {% include "cabecera_usuario.html" %}
+    <div class="container">
+        <h1>Bienvenido a la Tienda de Pasteles</h1>
+        <h2>Pasteles en Venta</h2>
+        {% if pasteles %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mostrar in pasteles %}
+                <tr>
+                    <td>{{ mostrar.nombre }}</td>
+                    <td>{{ mostrar.descripcion }}</td>
+                    <td>{{ mostrar.precio }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No hay pasteles disponibles.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

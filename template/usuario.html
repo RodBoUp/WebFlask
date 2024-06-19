@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Pasteles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url("{{ url_for('static', filename='images/base_fondo.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .intro {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #333;
+            border: 2px solid #eea942;
+        }
+        .intro h1, .intro h2 {
+            font-family: 'Pacifico', cursive;
+            margin: 0;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .image-container img {
+            width: 32%;
+            border-radius: 10px;
+            border: 2px solid #eea942;
+            transition: transform 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+        .tabla-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            border: 2px solid #eea942;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #eea942;
+            text-align: left;
+            padding: 12px;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: 700;
+        }
+        .btn-comprar {
+            background-color: #eea942;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-comprar:hover {
+            background-color: #cc8f36;
+        }
+        .carrito {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            z-index: 1000;
+            border: 2px solid #eea942;
+        }
+        .carrito ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .carrito li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eea942;
+            padding-bottom: 5px;
+        }
+        .carrito-total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn-pagar {
+            background-color: #59127a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .btn-pagar:hover {
+            background-color: #b26fb4;
+        }
+        footer {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-top: 2px solid #eea942;
+            text-align: center;
+            color: #333;
+            margin-top: auto;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        .mensaje-compra {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            border: 2px solid #eea942;
+        }
+        .map-container {
+            text-align: center; 
+            margin: 50px auto;
+        }
+        .map-container iframe {
+            width: 100%;
+            max-width: 800px; 
+            height: 450px; 
+            border: none; 
+            border-radius: 8px; 
+        }
+    </style>
+</head>
+<body>
+
+    {% include "cabecera_usuario.html" %}
+
+    <div class="container">
+        <div class="intro">
+            <h1>Bienvenido a la Tienda de Pasteles</h1>
+            <h2>Pasteles en Venta</h2>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/pastel1.png') }}" alt="Imagen 1">
+            <img src="{{ url_for('static', filename='images/pastel2.png') }}" alt="Imagen 2">
+            <img src="{{ url_for('static', filename='images/pastel3.png') }}" alt="Imagen 3">
+        </div>
+        <div class="tabla-container">
+            {% if pasteles %}
+                {% for mostrar in pasteles %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Producto</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ mostrar.nombre }}</td>
+                            <td>{{ mostrar.descripcion }}</td>
+                            <td>{{ mostrar.precio }}</td>
+                            <td><button class="btn-comprar">Añadir al carro</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endfor %}
+            {% else %}
+            <p>No hay pasteles disponibles.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="carrito" id="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="listaCarrito">
+        
+        </ul>
+        <div class="carrito-total" id="totalCarrito">
+            Total: $<span id="total">0.00</span>
+        </div>
+        <button class="btn-pagar" id="btnPagar">Pagar</button>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Derechos de autor © 2024 Baker's CS. Todos los derechos reservados.</p>
+            <p>Contáctanos: info@CS.com</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d903.2051660900523!2d-71.53485693473937!3d-16.391792874393524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b43a126c99f%3A0x163f88ffd93dedb3!2sPanaderia%20Arequipe%C3%B1a%20Don%20Apolinario%20o%20%22Pan%20de%20Ripacha%22!5e0!3m2!1ses-419!2spe!4v1718750548319!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        
+        </div>
+    </footer>
+
+    <div class="mensaje-compra" id="mensajeCompra">
+        <p>Pastel añadido al carrito</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var botonesComprar = document.querySelectorAll('.btn-comprar');
+            botonesComprar.forEach(function (boton) {
+                boton.addEventListener('click', function () {
+                    var producto = boton.parentElement.parentElement;
+                    var nombre = producto.querySelector('td:nth-child(1)').textContent;
+                    var descripcion = producto.querySelector('td:nth-child(2)').textContent;
+                    var precio = parseFloat(producto.querySelector('td:nth-child(3)').textContent.replace('$', ''));
+
+                    agregarAlCarrito(nombre, descripcion, precio);
+                    mostrarMensajeCompra();
+                    calcularTotal();
+                });
+            });
+
+            var btnPagar = document.getElementById('btnPagar');
+            btnPagar.addEventListener('click', function () {
+                var listaCarrito = document.getElementById('listaCarrito');
+                listaCarrito.innerHTML = '';
+
+                mostrarMensajeCompra('¡Gracias por tu compra!');
+
+                var totalElemento = document.getElementById('total');
+                totalElemento.textContent = '0.00';
+            });
+
+            function mostrarMensajeCompra(mensaje) {
+                var mensajeCompra = document.getElementById('mensajeCompra');
+                mensajeCompra.textContent = mensaje || 'Pastel añadido al carrito';
+                mensajeCompra.style.display = 'block';
+
+                setTimeout(function () {
+                    mensajeCompra.style.display = 'none';
+                }, 2000); 
+            }
+
+            function agregarAlCarrito(nombre, descripcion, precio) {
+                var carrito = document.getElementById('carrito');
+                var listaCarrito = document.getElementById('listaCarrito');
+
+                var elementoCarrito = document.createElement('li');
+                elementoCarrito.innerHTML = `
+                    <strong>${nombre}</strong> - ${descripcion} - Precio: $ ${precio.toFixed(2)}
+                `;
+
+                listaCarrito.appendChild(elementoCarrito);
+            }
+
+            function calcularTotal() {
+                var precios = document.querySelectorAll('#listaCarrito li');
+                var total = 0;
+                precios.forEach(function (item) {
+                    var precioTexto = item.textContent.split('Precio: $')[1];
+                    var precioNumerico = parseFloat(precioTexto);
+                    total += precioNumerico;
+                });
+
+                var totalElemento = document.getElementById('total');
+                totalElemento.textContent = total.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>

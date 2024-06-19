@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .total {
+            font-weight: 600;
+            text-align: right;
+            font-size: 1.2em;
+        }
+
+        .checkout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+    
+        .payment-form {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .payment-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .payment-form input[type=text], 
+        .payment-form input[type=number] {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .payment-form select {
+            width: 100%;
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        {% include "cabecera_tienda.html" %}
+    </div>
+    <div class="container">
+       
+        <div class="payment-form">
+            <h2>Detalles de Pago</h2>
+            <form action="/usuario" method="post">
+                <label for="nombre-tarjeta">Nombre en la Tarjeta:</label>
+                <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
+
+                <label for="numero-tarjeta">Número de Tarjeta:</label>
+                <input type="text" id="numero-tarjeta" name="numero-tarjeta" required>
+
+                <label for="fecha-expiracion">Fecha de Expiración:</label>
+                <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/YY" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" maxlength="4" required>
+
+                <label for="tipo-tarjeta">Tipo de Tarjeta:</label>
+                <select id="tipo-tarjeta" name="tipo-tarjeta" required>
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">MasterCard</option>
+                    <option value="amex">American Express</option>
+                </select>
+
+                <button type="submit" >Agregar Metodo de pago</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
